@@ -25,7 +25,7 @@ steps:
         docker build -t europe-southwest1-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT}/prueba:latest -f prueba/Dockerfile .
 
   # Subir imagen a Artifact Registry
-  - name: gcr.io-cloud-builders/docker
+  - name: gcr.io/cloud-builders/docker
     id: docker-push
     waitFor: ["docker-build"]
     args:
