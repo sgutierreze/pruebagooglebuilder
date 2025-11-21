@@ -41,7 +41,7 @@ steps:
       [
         "build",
         "-t",
-        "europe-southwest1-docker.pkg.dev/$PROJECT_ID/$ARTIFACT/prueba:latest",
+        "europe-southwest1-docker.pkg.dev/$PROJECT_ID/${ARTIFACT}/prueba:latest",
         "."
       ]
 
@@ -52,8 +52,8 @@ steps:
     args:
       [
         "push",
-        "europe-southwest1-docker.pkg.dev/$PROJECT_ID/$ARTIFACT/prueba:latest"
+        "europe-southwest1-docker.pkg.dev/$PROJECT_ID/${ARTIFACT}/prueba:latest"
       ]
 
 images:
-  - "europe-southwest1-docker.pkg.dev/$PROJECT_ID/$ARTIFACT/prueba:latest"
+  - "europe-southwest1-docker.pkg.dev/$PROJECT_ID/${ARTIFACT}/prueba:latest"
