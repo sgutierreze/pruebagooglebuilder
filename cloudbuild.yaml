@@ -15,7 +15,7 @@ steps:
         "europe-southwest1-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT}/prueba:latest",
         "-f",
         "prueba/prueba/Dockerfile",
-        "prueba/prueba"
+        "."
       ]
 
   # Subir imagen a Artifact Registry
