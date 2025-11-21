@@ -2,11 +2,12 @@ options:
   logging: CLOUD_LOGGING_ONLY
   
 steps:
-  - name: ubuntu
+  # 1. Restaurar dependencias
+  - name: mcr.microsoft.com/dotnet/sdk:8.0
     entrypoint: bash
     args:
       - -c
       - |
-        echo "Cloud Build funcionando"
-        echo "Fecha: $(date)"
+        echo "Restaurando dependencias..."
+        dotnet restore
 
