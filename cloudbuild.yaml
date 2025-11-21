@@ -1,0 +1,8 @@
+steps:
+  - name: ubuntu
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        echo "Cloud Build funcionando"
+        echo "Fecha: $(date)"
