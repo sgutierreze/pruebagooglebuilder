@@ -5,6 +5,15 @@ substitutions:
   _ARTIFACT: "gcp1-ar-sv-dev-td-gke-02"
 
 steps:
+  - name: ubuntu
+    id: list
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        echo "### LISTADO DEL REPO ###"
+        ls -R .
+
   # Construir imagen Docker
   - name: gcr.io/cloud-builders/docker
     id: docker-build
