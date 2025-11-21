@@ -9,5 +9,5 @@ steps:
       - -c
       - |
         echo "Restaurando dependencias..."
-        dotnet restore
+        dotnet restore prueba/prueba/prueba.csproj
 
