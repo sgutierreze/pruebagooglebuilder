@@ -8,15 +8,12 @@ steps:
   # Construir imagen Docker
   - name: gcr.io/cloud-builders/docker
     id: docker-build
+    entrypoint: bash
     args:
-      [
-        "build",
-        "-t",
-        "europe-southwest1-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT}/prueba:latest",
-        "-f",
-        "prueba/Dockerfile",
-        "."
-      ]
+      - c
+      - |
+        cd prueba/prueba
+        docker build -t europe-southwest1-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT}/prueba:latest .
 
   # Subir imagen a Artifact Registry
   - name: gcr.io-cloud-builders/docker
