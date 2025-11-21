@@ -21,8 +21,8 @@ steps:
     args:
       - -c
       - |
-        cd prueba/prueba
-        docker build -t europe-southwest1-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT}/prueba:latest .
+        cd prueba
+        docker build -t europe-southwest1-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT}/prueba:latest -f prueba/Dockerfile .
 
   # Subir imagen a Artifact Registry
   - name: gcr.io-cloud-builders/docker
