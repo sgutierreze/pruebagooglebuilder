@@ -5,41 +5,21 @@ substitutions:
   _ARTIFACT: "gcp1-ar-sv-dev-td-gke-02"
 
 steps:
-  # Restaurar dependencias
-  - name: mcr.microsoft.com/dotnet/sdk:8.0
-    id: restore
-    entrypoint: bash
-    args:
-      - -c
-      - |
-        echo "Restaurando dependencias..."
-        dotnet restore prueba/prueba/prueba.csproj
-
-  # Compilar en Release
-  - name: mcr.microsoft.com/dotnet/sdk:8.0
-    id: build
-    waitFor: ["restore"]
-    entrypoint: bash
-    args:
-      - -c
-      - |
-        echo "Compilando proyecto..."
-        dotnet publish prueba/prueba/prueba.csproj -c Release -o out
-
   # Construir imagen Docker
   - name: gcr.io/cloud-builders/docker
     id: docker-build
-    waitFor: ["build"]
     args:
       [
         "build",
         "-t",
         "europe-southwest1-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT}/prueba:latest",
-        "."
+        "-f",
+        "prueba/prueba/Dockerfile",
+        "prueba/prueba"
       ]
 
   # Subir imagen a Artifact Registry
-  - name: gcr.io/cloud-builders/docker
+  - name: gcr.io-cloud-builders/docker
     id: docker-push
     waitFor: ["docker-build"]
     args:
