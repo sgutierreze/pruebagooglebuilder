@@ -6,3 +6,4 @@ steps:
       - |
         echo "Cloud Build funcionando"
         echo "Fecha: $(date)"
+
