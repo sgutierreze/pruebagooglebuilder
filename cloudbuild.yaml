@@ -11,3 +11,11 @@ steps:
         echo "Restaurando dependencias..."
         dotnet restore prueba/prueba/prueba.csproj
 
+  # Compilar en Release
+  - name: mcr.microsoft.com/dotnet/sdk:8.0
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        echo "Compilando proyecto..."
+        dotnet build prueba/prueba/prueba.csproj --configuration Release
