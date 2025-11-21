@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\prueba",
+    "\\prueba\\prueba"
   ],
-  "SelectedNode": "\\cloudbuild.yaml",
+  "SelectedNode": "\\prueba\\prueba",
   "PreviewInSolutionExplorer": false
 }
