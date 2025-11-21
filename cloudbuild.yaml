@@ -1,9 +1,20 @@
 options:
   logging: CLOUD_LOGGING_ONLY
-  
+
+substitutions:
+  _ARTIFACT: "gcp1-ar-sv-dev-td-gke-02"
+
 steps:
-  # 1. Restaurar dependencias
+  # Mostrar estructura del repo (opcional pero útil)
+  - name: ubuntu
+    entrypoint: bash
+    args:
+      - -c
+      - ls -R .
+
+  # Restaurar dependencias
   - name: mcr.microsoft.com/dotnet/sdk:8.0
+    id: restore
     entrypoint: bash
     args:
       - -c
@@ -13,9 +24,36 @@ steps:
 
   # Compilar en Release
   - name: mcr.microsoft.com/dotnet/sdk:8.0
+    id: build
+    waitFor: ["restore"]
     entrypoint: bash
     args:
       - -c
       - |
         echo "Compilando proyecto..."
-        dotnet build prueba/prueba/prueba.csproj --configuration Release
+        dotnet publish prueba/prueba/prueba.csproj -c Release -o out
+
+  # Construir imagen Docker
+  - name: gcr.io/cloud-builders/docker
+    id: docker-build
+    waitFor: ["build"]
+    args:
+      [
+        "build",
+        "-t",
+        "europe-southwest1-docker.pkg.dev/$PROJECT_ID/$ARTIFACT/prueba:latest",
+        "."
+      ]
+
+  # Subir imagen a Artifact Registry
+  - name: gcr.io/cloud-builders/docker
+    id: docker-push
+    waitFor: ["docker-build"]
+    args:
+      [
+        "push",
+        "europe-southwest1-docker.pkg.dev/$PROJECT_ID/$ARTIFACT/prueba:latest"
+      ]
+
+images:
+  - "europe-southwest1-docker.pkg.dev/$PROJECT_ID/$ARTIFACT/prueba:latest"
